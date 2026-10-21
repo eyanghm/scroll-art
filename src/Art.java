@@ -1,0 +1,266 @@
+import java.util.Random;
+
+public class Art {
+      static final Random rand = new Random();
+    static final int WIDTH = getTerminalWidth() - 1;
+    
+    public static void main(String[] args) throws InterruptedException {
+
+         long startTime = System.currentTimeMillis();
+        int iterations = 0;
+        char[][] nextRows = new char[30][WIDTH]; // store upcoming rows
+        for (int i = 0; i < nextRows.length; i++) {
+            nextRows[i] = emptyRow();
+        }
+        char[] prevRow = nextRows[0];
+
+        while (true) {
+            // At each lane now on the top row, 7% chance to add a new image
+            for (int x = 0; x < WIDTH - 30; x += 30) {
+                if (isBlank(prevRow, x) && rand.nextDouble() < 0.07) {
+                    loadNextRowsWithImage(nextRows, x);
+                }
+            }
+            // Print and remove the top row
+            System.out.println(new String(nextRows[0]));
+            prevRow = nextRows[0]; // update prev row
+            // Shift all rows up
+            shiftRowsUp(nextRows);
+            Thread.sleep(20); // Delay in ms
+            long time = System.currentTimeMillis() - startTime;
+            iterations++;
+
+            // System.err.println("average time per frame: " + (time / iterations) + " ms");
+        }
+        
+    }
+
+     
+    public static int getTerminalWidth() {
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
+            return getUnixTerminalWidth();
+        } else {
+            return 80; // fallback for unknown OS
+        }
+    }
+
+        private static int getUnixTerminalWidth() {
+        try {
+            // Try to get terminal size from environment variables first
+            String columns = System.getenv("COLUMNS");
+            if (columns != null && !columns.isEmpty()) {
+                return Integer.parseInt(columns);
+            }
+
+            // Fallback to stty command
+            ProcessBuilder pb = new ProcessBuilder("/bin/sh", "-c", "stty size </dev/tty");
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
+            java.io.BufferedReader reader = new java.io.BufferedReader(
+                    new java.io.InputStreamReader(process.getInputStream()));
+            String output = reader.readLine();
+            if (output != null && !output.isEmpty()) {
+                String[] parts = output.trim().split(" ");
+                return Integer.parseInt(parts[1]); // columns
+            }
+        } catch (Exception ignored) {
+            // Silently ignore errors and fall back to default
+        }
+        return 80; // fallback
+    }
+
+    static boolean isBlank(char[] row, int x) {
+        for (int i = x; i < x + 30; i++) {
+            if (row[i] != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void loadNextRowsWithImage(char[][] nextRows, int x) {
+        // triple array version to better manage all images, it's getting a little bit out of hand!! and it is not like they are all the same size anyway.
+        char[][][] images = {getBoba(), getPenguin()};
+        char[][] img = images[rand.nextInt(images.length)];
+        for (int iy = 0; iy < img.length; iy++) { // height
+            for (int ix = 0; ix < img[iy].length; ix++) { // width
+                nextRows[iy][x + ix] = img[iy][ix];
+            }
+        }
+    }
+
+    static void shiftRowsUp(char[][] nextRows) {
+        for (int i = 1; i < nextRows.length; i++) {
+            nextRows[i - 1] = nextRows[i];
+        }
+        nextRows[nextRows.length - 1] = emptyRow();
+    }
+
+    static char[] emptyRow() {
+        char[] row = new char[WIDTH];
+        for (int i = 0; i < WIDTH; i++) {
+            row[i] = ' ';
+        }
+        return row;
+    }
+
+   
+
+    
+    static char[][] getBoba() {
+        char[][]img=new char [30][21];
+        for(int y=0; y<30; y++ ){
+            for(int x=0;x<21;x++){
+                img[y][x]=' ';
+            }
+        }
+
+        img[2][13] = '_';
+        img[2][14] = '_';
+        img[2][15] = '_';
+        img[2][16] = '_';
+        img[2][17] = '_';
+        img[2][18] = '_';
+        img[2][19] = '_';
+
+        img[3][12] = '/';
+        img[3][14] = '_';
+        img[3][15] = '_';
+        img[3][16] = '_';
+        img[3][17] = '_';
+        img[3][18] = '_';
+        img[3][19] = '_';
+        img[3][20] = ')';
+
+        img[4][11] = '/';
+        img[4][13] = '/';
+
+        img[5][10] = '/';
+        img[5][12] = '/';
+        img[6][9] = '/';
+        img[6][11] = '/';
+        img[7][9] = '|';
+        img[7][11] = '|';
+        img[8][9] = '|';
+        img[8][11] = '|';
+
+        img[8][8] = '_';
+        img[8][7] = '_';
+        img[8][6] = '_';
+        img[8][5] = '_';
+        img[8][4] = '_';
+
+        img[8][12] = '_';
+        img[8][13] = '_';
+        img[8][14] = '_';
+        img[8][15] = '_';
+        img[8][16] = '_';
+
+        img[9][3] = '/';
+        img[10][2] = '/';
+        img[11][1] = '/';
+        img[9][17] = '\\';
+        img[10][18] = '\\';
+        img[11][19] = '\\';
+
+        for(int i = 12; i <= 26; i++){
+            img[i][1] = '|';
+            img[i][19] = '|';
+        }
+
+        img[27][1] = '\\';
+        img[28][2] = '\\';
+        img[27][19] = '/';
+        img[28][18] = '/';
+
+        for(int i = 3; i <= 17; i++){
+            img[28][i] = '_';
+        }
+
+        for(int i = 10; i <= 21; i++){
+            img[i][9] = '|';
+            img[i][11] = '|';
+        }
+
+        img[12][2] = '\\';
+        img[12][18] = '/';
+        for(int i = 3; i <= 17; i++){
+            img[12][i] = '_';
+        }
+
+        img[22][9] = '\\';
+        img[22][10] = '_';
+        img[22][11] = '/';
+ 
+        img[9][8] = '(';
+        img[9][9] = '_';
+        img[9][10] = '_';
+        img[9][11] = '_';
+        img[9][12] = ')';
+
+        img[14][8] = '_';
+        img[14][7] = '_';
+        img[14][6] = '_';
+        img[15][5] = '/';
+        img[15][4] = '_';
+        img[15][3] = '_';
+        img[15][2] = '\\';
+
+        img[15][12] = '\\';
+        img[15][13] = '_';
+        img[15][14] = '_';
+        img[15][15] = '_';
+        img[15][16] = '/';
+        img[14][17] = '_';
+        img[14][18] = '_';
+
+        img[26][2] = '@';
+        img[26][3] = '@';
+        img[25][2] = '@';
+        img[25][3] = '@';
+        img[25][4] = '@';
+
+        img[24][9] = '@';
+        img[24][8] = '@';
+        img[25][9] = '@';
+        img[25][8] = '@';
+
+        img[27][7] = '@';
+        img[27][8] = '@';
+
+        img[26][13] = '@';
+        img[26][14] = '@';
+        img[25][13] = '@';
+        img[25][14] = '@';
+
+        img[24][18] = '@';
+        img[23][18] = '@';
+
+        img[23][4] = '@';
+        img[23][5] = '@';
+        img[23][6] = '@';
+        img[22][5] = '@';
+        img[22][6] = '@';
+
+        img[22][12] = '@';
+        img[23][12] = '@';
+        img[22][13] = '@';
+        img[23][13] = '@';
+        img[23][14] = '@';
+        return img;
+
+    }
+
+    static char[][] getPenguin() {
+        char[][]img=new char [15][15];
+        for(int y=0; y<15; y++ ){
+            for(int x=0;x<15;x++){
+                img[y][x]=' ';
+            }
+        }
+        return img;
+    }
+
+}
