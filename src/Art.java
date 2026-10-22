@@ -8,7 +8,7 @@ public class Art {
 
          long startTime = System.currentTimeMillis();
         int iterations = 0;
-        char[][] nextRows = new char[50][WIDTH]; // store upcoming rows
+        char[][] nextRows = new char[40][WIDTH]; // store upcoming rows
         for (int i = 0; i < nextRows.length; i++) {
             nextRows[i] = emptyRow();
         }
@@ -16,7 +16,7 @@ public class Art {
 
         while (true) {
             // At each lane now on the top row, 7% chance to add a new image
-            for (int x = 0; x < WIDTH - 50; x += 50) {
+            for (int x = 0; x < WIDTH - 40; x += 40) {
                 if (isBlank(prevRow, x) && rand.nextDouble() < 0.07) {
                     loadNextRowsWithImage(nextRows, x);
                 }
@@ -72,7 +72,7 @@ public class Art {
     }
 
     static boolean isBlank(char[] row, int x) {
-        for (int i = x; i < x + 50; i++) {
+        for (int i = x; i < x + 40; i++) {
             if (row[i] != ' ') {
                 return false;
             }
@@ -254,13 +254,17 @@ public class Art {
         img[22][13] = '@';
         img[23][13] = '@';
         img[23][14] = '@';
+
+        //signature
+        img[29][19] = 'E';
+        img[29][20] = 'Y';
         return img;
 
     }
 
     static char[][] getPenguin() {
-        char[][]img=new char [50][45];
-        for(int y=0; y<50; y++ ){
+        char[][]img=new char [40][45];
+        for(int y=0; y<40; y++ ){
             for(int x=0; x<45; x++){
                 img[y][x]=' ';
             }
@@ -452,12 +456,16 @@ public class Art {
         // eye
 
         img[7][23] = '@';
+
+        // signature
+        img[39][4] = 'E';
+        img[39][5] = 'Y';
         return img;
     }
 
     static char[][] getMiffy() {
-        char[][]img=new char [24][23];
-        for(int y=0; y<24; y++ ){
+        char[][]img=new char [22][23];
+        for(int y=0; y<22; y++ ){
             for(int x=0;x<23;x++){
                 img[y][x]=' ';
             }
@@ -558,6 +566,10 @@ public class Art {
         img[10][12] = '\\';
         img[9][12] = '/';
         img[10][11] = '/';
+
+        // signature
+        img[21][4] = 'E';
+        img[21][5] = 'Y';
         return img;
 
         
