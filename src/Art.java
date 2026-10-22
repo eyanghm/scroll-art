@@ -1,12 +1,12 @@
 import java.util.Random;
 
 public class Art {
-      static final Random rand = new Random();
+    static final Random rand = new Random();
     static final int WIDTH = getTerminalWidth() - 1;
     
     public static void main(String[] args) throws InterruptedException {
 
-         long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         int iterations = 0;
         char[][] nextRows = new char[40][WIDTH]; // store upcoming rows
         for (int i = 0; i < nextRows.length; i++) {
