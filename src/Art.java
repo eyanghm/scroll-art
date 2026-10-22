@@ -8,7 +8,7 @@ public class Art {
 
          long startTime = System.currentTimeMillis();
         int iterations = 0;
-        char[][] nextRows = new char[30][WIDTH]; // store upcoming rows
+        char[][] nextRows = new char[50][WIDTH]; // store upcoming rows
         for (int i = 0; i < nextRows.length; i++) {
             nextRows[i] = emptyRow();
         }
@@ -16,7 +16,7 @@ public class Art {
 
         while (true) {
             // At each lane now on the top row, 7% chance to add a new image
-            for (int x = 0; x < WIDTH - 30; x += 30) {
+            for (int x = 0; x < WIDTH - 50; x += 50) {
                 if (isBlank(prevRow, x) && rand.nextDouble() < 0.07) {
                     loadNextRowsWithImage(nextRows, x);
                 }
@@ -72,7 +72,7 @@ public class Art {
     }
 
     static boolean isBlank(char[] row, int x) {
-        for (int i = x; i < x + 30; i++) {
+        for (int i = x; i < x + 50; i++) {
             if (row[i] != ' ') {
                 return false;
             }
@@ -82,7 +82,7 @@ public class Art {
 
     private static void loadNextRowsWithImage(char[][] nextRows, int x) {
         // triple array version to better manage all images, it's getting a little bit out of hand!! and it is not like they are all the same size anyway.
-        char[][][] images = {getBoba(), getPenguin()};
+        char[][][] images = {getBoba(), getPenguin(), getMiffy()};
         char[][] img = images[rand.nextInt(images.length)];
         for (int iy = 0; iy < img.length; iy++) { // height
             for (int ix = 0; ix < img[iy].length; ix++) { // width
@@ -117,6 +117,7 @@ public class Art {
             }
         }
 
+        // cup + straw 
         img[2][13] = '_';
         img[2][14] = '_';
         img[2][15] = '_';
@@ -194,11 +195,14 @@ public class Art {
         img[22][10] = '_';
         img[22][11] = '/';
  
+        // straw hole 
         img[9][8] = '(';
         img[9][9] = '_';
         img[9][10] = '_';
         img[9][11] = '_';
         img[9][12] = ')';
+
+        // wavy liquid part 
 
         img[14][8] = '_';
         img[14][7] = '_';
@@ -216,6 +220,7 @@ public class Art {
         img[14][17] = '_';
         img[14][18] = '_';
 
+        // pearls  
         img[26][2] = '@';
         img[26][3] = '@';
         img[25][2] = '@';
@@ -254,7 +259,85 @@ public class Art {
     }
 
     static char[][] getPenguin() {
-        char[][]img=new char [15][15];
+        char[][]img=new char [50][45];
+        for(int y=0; y<50; y++ ){
+            for(int x=0; x<45; x++){
+                img[y][x]=' ';
+            }
+        }
+
+        for(int i = 14; i <= 24; i++){
+            img[1][i] = '_';
+        }
+
+        // outer body
+
+        img[2][13] = '/';
+        img[3][12] = '/';
+        img[3][11] = '_';
+        img[4][10] = '/';
+        img[5][9] = '/';
+        img[6][8] = '/';
+        img[7][7] = '/';
+        img[8][6] = '/';
+        img[9][6] = '|';
+        img[10][6] = '|';
+        img[11][6] = '|';
+        img[12][7] = '\\';
+        img[13][8] = '\\';
+        img[14][8] = '/';
+        img[15][7] = '/';
+        img[16][6] = '/';
+        img[17][5] = '/';
+        img[18][4] = '/';
+        img[19][3] = '/';
+
+        for(int i = 20; i <= 26; i++){
+            img[i][2] = '|';
+        }
+
+        img[27][2] = '\\';
+        img[28][3] = '\\';
+        img[28][4] = '/';
+        img[27][5] = '/';
+        img[26][5] = '|';
+        img[25][6] = '/';
+        img[24][6] = '|';
+        img[23][6] = '|';
+        img[22][7] = '/';
+
+        for(int i = 23; i <= 30; i++){
+            img[i][7] = '|';
+        }
+
+        img[2][25] = '\\';
+        img[3][26] = '\\';
+        img[3][27] = '_';
+        img[4][28] = '\\';
+        img[5][29] = '\\';
+        img[5][30] = '_';
+        img[6][31] = '\\';
+
+        for(int i = 32; i <= 36; i++){
+            img[6][i] = '_';
+        }
+
+        img[7][37] = '\\';
+        img[7][38] = '_';
+        img[7][39] = '_';
+        img[7][40] = '_';
+        img[7][41] = '_';
+        img[8][41] = '/';
+        img[9][40] = '/';
+    
+        for(int i = 39; i >= 34; i--){
+            img[9][i] = '_';
+        }
+        return img;
+    }
+
+    static char[][] getMiffy() {
+        char[][]img=new char [45][45];
         for(int y=0; y<15; y++ ){
             for(int x=0;x<15;x++){
                 img[y][x]=' ';
