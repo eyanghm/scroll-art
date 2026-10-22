@@ -7,4 +7,4 @@ For this project, I chose to make 3 different ASCII arts of things that I though
 #### Process 
 For each artwork, I first drew it out, mostly utilizing slashes, the | symbol, and underscores to create the shape. Sometimes I used @ to color in a few parts. Then, I created a box on the graph paper to represent where I wanted the overall array to go, and also to figure out the dimensions. Then I transferred everything into Java, often using for loops when there was a repeated pattern or element in the drawing I did on paper. 
 
-(Citation Points: 0)
+(Citation Points: 1)
