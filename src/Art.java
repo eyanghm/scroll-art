@@ -459,9 +459,16 @@ public class Art {
         char[][]img=new char [45][45];
         for(int y=0; y<15; y++ ){
             for(int x=0;x<15;x++){
-                img[y][x]=' ';
+                img[24][23]=' ';
             }
         }
+
+        // ears
+        img[1][7] = '_';
+        img[2][3] = '/';
+        img[2][10] = '\\';
+        img[3][5] = '(';
+        img[3][9] = ')';
         return img;
     }
 
