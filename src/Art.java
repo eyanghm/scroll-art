@@ -16,7 +16,7 @@ public class Art {
 
         while (true) {
             // At each lane now on the top row, 7% chance to add a new image
-            for (int x = 0; x < WIDTH - 40; x += 40) {
+            for (int x = 0; x < WIDTH - 45; x += 45) {
                 if (isBlank(prevRow, x) && rand.nextDouble() < 0.07) {
                     loadNextRowsWithImage(nextRows, x);
                 }
