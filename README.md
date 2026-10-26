@@ -10,6 +10,8 @@ For each artwork, I first drew it out, mostly utilizing slashes, the | symbol, a
 Here are some sketches I made:
 
 ![Error](boba.png)
+![Error](penguin.png)
+![Error](miffy.png)
 
 #### Citations
 
