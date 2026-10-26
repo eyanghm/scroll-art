@@ -26,7 +26,7 @@ public class Art {
             prevRow = nextRows[0]; // update prev row
             // Shift all rows up
             shiftRowsUp(nextRows);
-            Thread.sleep(20); // Delay in ms
+            Thread.sleep(35); // Delay in ms
             long time = System.currentTimeMillis() - startTime;
             iterations++;
 
