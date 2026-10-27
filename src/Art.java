@@ -3,6 +3,8 @@ import java.util.Random;
 public class Art {
     static final Random rand = new Random();
     static final int WIDTH = getTerminalWidth() - 1;
+    static final int PENGUIN_WIDTH = 45;
+    static final int PENGUIN_HEIGHT = 40;
     
     public static void main(String[] args) throws InterruptedException {
 
@@ -16,7 +18,7 @@ public class Art {
 
         while (true) {
             // At each lane now on the top row, 7% chance to add a new image
-            for (int x = 0; x < WIDTH - 45; x += 45) {
+            for (int x = 0; x < WIDTH - PENGUIN_WIDTH; x += PENGUIN_WIDTH ) {
                 if (isBlank(prevRow, x) && rand.nextDouble() < 0.07) {
                     loadNextRowsWithImage(nextRows, x);
                 }
