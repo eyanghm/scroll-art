@@ -52,8 +52,9 @@ public class Art {
         AsciiArt miffy = new AsciiArt(getMiffy());
         AsciiArt totoro = new AsciiArt(getTotoro());
         AsciiArt fish = new AsciiArt(getBigFish());
+        AsciiArt pumpkin = new AsciiArt(pumpkin());
 
-        AsciiArt[] images = { boba, penguin, miffy, totoro, fish};
+        AsciiArt[] images = { boba, penguin, miffy, totoro, fish, pumpkin};
         AsciiArt art = images[rand.nextInt(images.length)];
 
         for (int iy = 0; iy < art.height; iy++) { // height
@@ -580,6 +581,7 @@ public class Art {
     }
 
     static char [][] getTotoro() {
+        // Credits to Caroline's project!
         char[][] img = new char[16][29];
         for (int y = 0; y < 16; y++){
             for (int x = 0; x < 29; x++) {
@@ -734,6 +736,7 @@ public class Art {
     }
 
       static char[][] getBigFish() {
+        // Credits to Samira for this code!
         char[][] img = new char[8][20];
         // fill with empty space
         for (int y = 0; y < 8; y++) {
@@ -790,4 +793,118 @@ public class Art {
 
         return img;
     }
+
+    public static char[][] pumpkin() {
+    // Credits to Emma for this part of the code!
+    int rows2 = 13, col2 = 30;
+        char[][] arr = new char[rows2][col2];
+        for(int y = 0; y < rows2; y++) {
+            for(int x = 0; x < col2; x++) {
+                arr[y][x] = ' ';
+            }
+        }
+        arr[0][12] = '%';
+        arr[1][11] = '/';
+        arr[1][12] = '%';
+        arr[1][13] = '%';
+        arr[2][11] = '/';
+        arr[3][11] = '/';
+        arr[4][7] = '/';
+        arr[4][8] = '\\';
+        arr[4][10] = '/';
+        arr[4][11] = '/';
+        arr[4][12] = '\\';
+        arr[4][13] = '\\';
+        arr[4][15] = '/';
+        arr[4][16] = '\\';
+        arr[5][3] = '\\';
+        arr[5][4] = '\\';
+        arr[5][6] = '/';
+        arr[5][9] = '/';
+        arr[5][14] = '\\';
+        arr[5][17] = '\\';
+        arr[5][19] = '/';
+        arr[5][20] = '/';
+        arr[6][2] = '\\';
+        arr[6][5] = '/';
+        arr[6][9] = '/';
+        arr[6][14] = '\\';
+        arr[6][18] = '\\';
+        arr[6][21] = '/';
+        arr[6][28] = '6';
+        arr[7][1] = '\\';
+        arr[7][5] = '/';
+        arr[7][9] = '/';
+        arr[7][14] = '\\';
+        arr[7][18] = '\\';
+        arr[7][21] = '/';
+        arr[7][28] = '|';
+        arr[8][1] = '\\';
+        arr[8][5] = '/';
+        arr[8][9] = '/';
+        arr[8][14] = '\\';
+        arr[8][18] = '\\';
+        arr[8][21] = '/';
+        arr[8][24] = '6';
+        arr[8][27] = '|';
+        arr[8][29] = '|';
+        arr[9][1] = '\\';
+        arr[9][5] = '/';
+        arr[9][9] = '/';
+        arr[9][14] = '\\';
+        arr[9][18] = '\\';
+        arr[9][21] = '/';
+        arr[9][24] = '|';
+        arr[9][27] = '|';
+        arr[9][29] = '|';
+        arr[10][1] = '\\';
+        arr[10][5] = '/';
+        arr[10][9] = '/';
+        arr[10][14] = '\\';
+        arr[10][18] = '\\';
+        arr[10][21] = '/';
+        arr[10][23] = '|';
+        arr[10][25] = '|';
+        arr[10][27] = '|';
+        arr[10][29] = '|';
+        arr[11][2] = '\\';
+        arr[11][5] = '/';
+        arr[11][9] = '/';
+        arr[11][14] = '\\';
+        arr[11][18] = '\\';
+        arr[11][20] = '/';
+        arr[11][23] = '|';
+        arr[11][25] = '|';
+        arr[11][27] = '|';
+        arr[11][29] = '|';
+        arr[12][3] = '\\';
+        arr[12][4] = '_';
+        arr[12][5] = '/';
+        arr[12][6] = '_';
+        arr[12][7] = '_';
+        arr[12][8] = '_';
+        arr[12][9] = '/';
+        arr[12][10] = '_';
+        arr[12][11] = '_';
+        arr[12][12] = '_';
+        arr[12][13] = '_';
+        arr[12][14] = '\\';
+        arr[12][15] = '_';
+        arr[12][16] = '_';
+        arr[12][17] = '_';
+        arr[12][18] = '\\';
+        arr[12][19] = '/';
+        arr[12][23] = '|';
+        arr[12][24] = '_';
+        arr[12][25] = '|';
+        arr[12][27] = '|';
+        arr[12][28] = '_';
+        arr[12][29] = '|';
+
+        arr[3][25] = 'E';
+        arr[3][26] = 'W';
+    
+        return arr;
+
+}
 }
