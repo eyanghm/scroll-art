@@ -18,7 +18,7 @@ public class Art {
 
         while (true) {
             // At each lane now on the top row, 7% chance to add a new image
-            for (int x = 0; x < WIDTH - PENGUIN_WIDTH; x += PENGUIN_WIDTH ) {
+            for (int x = 0; x < WIDTH - PENGUIN_WIDTH; x += PENGUIN_WIDTH) {
                 if (isBlank(prevRow, x) && rand.nextDouble() < 0.07) {
                     loadNextRowsWithImage(nextRows, x);
                 }
@@ -28,7 +28,7 @@ public class Art {
             prevRow = nextRows[0]; // update prev row
             // Shift all rows up
             shiftRowsUp(nextRows);
-            Thread.sleep(35); // Delay in ms
+            Thread.sleep(50); // Delay in ms
             long time = System.currentTimeMillis() - startTime;
             iterations++;
 
@@ -37,6 +37,44 @@ public class Art {
         
     }
 
+    static boolean isBlank(char[] prevRow, int x) {
+        for (int i = x; i < x + 45; i++) {
+            if (prevRow[i] != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void loadNextRowsWithImage(char[][] nextRows, int x) {
+        AsciiArt boba = new AsciiArt(getBoba());
+        AsciiArt penguin = new AsciiArt(getPenguin());
+        AsciiArt miffy = new AsciiArt(getMiffy());
+
+        AsciiArt[] images = { boba, penguin, miffy};
+        AsciiArt art = images[rand.nextInt(images.length)];
+
+        for (int iy = 0; iy < art.height; iy++) { // height
+            for (int ix = 0; ix < art.width; ix++) { // width
+                nextRows[iy][x + ix] = art.img[iy][ix];
+            }
+        }
+    }
+
+    static void shiftRowsUp(char[][] nextRows) {
+        for (int i = 1; i < nextRows.length; i++) {
+            nextRows[i - 1] = nextRows[i];
+        }
+        nextRows[nextRows.length - 1] = emptyRow();
+    }
+
+    static char[] emptyRow() {
+        char[] row = new char[WIDTH];
+        for (int i = 0; i < WIDTH; i++) {
+            row[i] = ' ';
+        }
+        return row;
+    }
      
     public static int getTerminalWidth() {
         String os = System.getProperty("os.name").toLowerCase();
@@ -72,44 +110,6 @@ public class Art {
         }
         return 80; // fallback
     }
-
-    static boolean isBlank(char[] row, int x) {
-        for (int i = x; i < x + 40; i++) {
-            if (row[i] != ' ') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static void loadNextRowsWithImage(char[][] nextRows, int x) {
-        // triple array version to better manage all images, it's getting a little bit out of hand!! and it is not like they are all the same size anyway.
-        char[][][] images = {getBoba(), getPenguin(), getMiffy()};
-        char[][] img = images[rand.nextInt(images.length)];
-        for (int iy = 0; iy < img.length; iy++) { // height
-            for (int ix = 0; ix < img[iy].length; ix++) { // width
-                nextRows[iy][x + ix] = img[iy][ix];
-            }
-        }
-    }
-
-    static void shiftRowsUp(char[][] nextRows) {
-        for (int i = 1; i < nextRows.length; i++) {
-            nextRows[i - 1] = nextRows[i];
-        }
-        nextRows[nextRows.length - 1] = emptyRow();
-    }
-
-    static char[] emptyRow() {
-        char[] row = new char[WIDTH];
-        for (int i = 0; i < WIDTH; i++) {
-            row[i] = ' ';
-        }
-        return row;
-    }
-
-   
-
     
     static char[][] getBoba() {
         char[][]img=new char [30][21];
